@@ -1,3 +1,5 @@
+Program point where pass reduces the code after optimizations, rest are all unchanged:
+
 {
     %1 = alloca i32, align 4
     %2 = alloca i32, align 4
@@ -47,12 +49,11 @@
     call void @llvm.lifetime.end.p0i8(i64 4, i8* %28) #3
     ret i32 %25
 }
-1. Annotation2MetadataPass
+1. Annotation2MetadataPass (It just add Annotation to Metadata)
 2. ForceFunctionAttrsPass
 3. InferFunctionAttrsPass
 4. LowerExpectIntrinsicPass
 5. SimplifyCFGPass
-
 
 
 {
@@ -123,6 +124,7 @@
 13. PromotePass
 14. DeadArgumentEliminationPass
 
+
 {
     %1 = alloca i32, align 4
     %2 = bitcast i32* %1 to i8*
@@ -145,6 +147,8 @@
 15. InstCombinePass :involves Constant Folding, Algebraic Identities, Strength Reduction,
 Constant Propagation and Folding, Instruction Simplification
 
+
+
 {
   %1 = alloca i32, align 4
   %2 = bitcast i32* %1 to i8*
@@ -154,7 +158,7 @@ Constant Propagation and Folding, Instruction Simplification
   call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %2) #3
   ret i32 %4
 }
-16. SimplifyCFGPass :
+16. SimplifyCFGPass : It resolves the graph and prune unnecessary branches and merge them into single block
 
 17. RequireAnalysisPass<llvm::GlobalsAA, llvm::Module>
 18. InvalidateAnalysisPass<llvm::AAManager>
